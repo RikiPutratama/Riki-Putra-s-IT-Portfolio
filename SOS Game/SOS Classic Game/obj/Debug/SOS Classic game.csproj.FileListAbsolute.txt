@@ -1,0 +1,8 @@
+C:\Users\Riki Putra\OneDrive\QUT Master of IT\Semester 2 2023\IFN563 Object Oriented Design\Assignments\SOS Game\SOS Classic game\bin\Debug\SOS Classic game.exe.config
+C:\Users\Riki Putra\OneDrive\QUT Master of IT\Semester 2 2023\IFN563 Object Oriented Design\Assignments\SOS Game\SOS Classic game\bin\Debug\SOS Classic game.exe
+C:\Users\Riki Putra\OneDrive\QUT Master of IT\Semester 2 2023\IFN563 Object Oriented Design\Assignments\SOS Game\SOS Classic game\bin\Debug\SOS Classic game.pdb
+C:\Users\Riki Putra\OneDrive\QUT Master of IT\Semester 2 2023\IFN563 Object Oriented Design\Assignments\SOS Game\SOS Classic game\obj\Debug\SOS Classic game.csproj.AssemblyReference.cache
+C:\Users\Riki Putra\OneDrive\QUT Master of IT\Semester 2 2023\IFN563 Object Oriented Design\Assignments\SOS Game\SOS Classic game\obj\Debug\SOS Classic game.csproj.SuggestedBindingRedirects.cache
+C:\Users\Riki Putra\OneDrive\QUT Master of IT\Semester 2 2023\IFN563 Object Oriented Design\Assignments\SOS Game\SOS Classic game\obj\Debug\SOS Classic game.csproj.CoreCompileInputs.cache
+C:\Users\Riki Putra\OneDrive\QUT Master of IT\Semester 2 2023\IFN563 Object Oriented Design\Assignments\SOS Game\SOS Classic game\obj\Debug\SOS Classic game.exe
+C:\Users\Riki Putra\OneDrive\QUT Master of IT\Semester 2 2023\IFN563 Object Oriented Design\Assignments\SOS Game\SOS Classic game\obj\Debug\SOS Classic game.pdb

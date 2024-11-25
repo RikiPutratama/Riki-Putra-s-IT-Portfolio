@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<div class="row align-items-center home-banner" >
+    <div class="col-12 col-lg-6 h-100  ">
+        <div class="col-12 col-md-12 h-100  media bg-image position-relative" style="background-image: url('../static/images/home.png'); ;">
+            <div class="overlay">
+                <div class=" h-100" style="position: relative; z-index: 1;">
+                    <div class="row text-center h-100">
+                        <h3 class=" col-12  display-4 text-white font-weight-bold">- Samskara - </h3>
+                        <h3 class=" col-12 mx-auto text-white font-weight-bold align-self-end h-0">-Timeless Apparel-</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-lg-6 h-100 row ml-0  ">
+        <a class="col-12" href="{{ url_for('products.shop', gender='man') }}">
+            <div class=" row media   bg-image position-relative banner-card-right h-100" style="background-image: url('../static/images/Man/Jackets/1.png')">
+                <div class="overlay">
+                    <div class="container-fluid d-flex flex-column align-items-start justify-content-start " style="position: relative; z-index: 1;">
+
+                        <h1 class="text-white font-weight-bold w-75 responsive-display ml-4">Men</h1>
+                    </div>
+                </div>
+            </div>
+        </a>
+
+        <a class="col-12" href="{{ url_for('products.shop', gender='woman') }}">
+            <div class="row   bg-image position-relative banner-card-right h-100" style=" background-image: url('../static/images/Woman/Jackets/2.jpg')">
+                <div class="overlay">
+                    <div class="d-flex flex-column align-items-end justify-content-end h-100" style=" position: relative; z-index: 1;">
+                        <h1 class="text-white font-weight-bold responsive-display mr-4">Women</h1>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+
+
+</div>
+</div>
+
+
+{% endblock %}
+

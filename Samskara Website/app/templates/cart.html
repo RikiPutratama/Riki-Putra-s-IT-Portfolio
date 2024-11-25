@@ -1,0 +1,107 @@
+{% extends "base.html" %} {% block content %}
+<div class="row justify-content-center mt-4">
+	<h1 class="mt-4 col-12 col-lg-10 font-weight-bold">Your cart</h1>
+
+	<div class="cart-checkout row no-gutter col-12 col-lg-10">
+		{%if products_in_cart!= [] %}
+		<div class="col-12 col-lg-8 mb-4">
+			{% for item in products_in_cart %}
+			<hr class="col-11" />
+			<div class="cart-row col-12 row align-items-center mb-4">
+				<img
+					class="col-4 col-md-2 h-100"
+					src="{{item.image}}"
+					style="object-fit: cover"
+				/>
+				<div
+					class="col-8 col-md-10 col-lg-10 row justify-content-center align-items-center"
+				>
+					<div class="col-6 col-sm-3">
+						<p class="font-weight-bold mb-0">{{item.name}}</p>
+						{%for option in item.options%}
+						<span class="text-sm">{{option.group}}: </span>
+						<span class="text-sm">{{option.name}}</span>
+
+						{%endfor%}
+					</div>
+
+					<form
+						class="col-6 col-sm-3 justify-content-center d-flex order-sm-4"
+						method="post"
+						action="{{ url_for('cart.delete_item',
+						item_id=item.id) }}"
+					>
+						<button type="submit" class="close" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</form>
+					<hr class="col-11 d-sm-none" />
+
+					<div class="col-6 col-sm-3 d-sm-none">
+						<p class="mb-0">Quantity:</p>
+					</div>
+					<div class="col-6 col-sm-3 text-center">
+						<p class="font-weight-bold mb-0">X{{item.quantity}}</p>
+					</div>
+					<hr class="col-11 d-sm-none" />
+
+					<div class="col-6 col-sm-3 d-sm-none">
+						<p class="mb-0">Price:</p>
+					</div>
+					<div class="col-6 col-sm-3 text-center">
+						{% if not item.discount_price %}
+						<p class="font-weight-bold mb-0">${{item.price}}</p>
+						{%else%}
+						<span class="font-weight-bold">
+							${{item.discount_price}}
+							<span class="font-weight-light text-danger"
+								><s>${{item.price}}</s></span
+							>
+						</span>
+						{%endif%}
+					</div>
+				</div>
+			</div>
+
+			{%endfor%}
+		</div>
+
+		<aside id="cart-checkout-overview" class="checkout-wrapper col-12 col-lg-4">
+			<div class="p-4 rounded bg-light row">
+				<h2 class="col-12 font-weight-bold">Total</h2>
+
+				<hr class="col-12" />
+
+				<div class="col-12 row">
+					<p class="col" id="totalItemQuantity">
+						{{ products_in_cart|length }} Products
+					</p>
+					<p class="col" id="totalPrice">${{totals.before_discount}}</p>
+				</div>
+				<hr class="col-12" />
+
+				{% if totals.discount != 0%}
+				<div id="totalDiscount" class="col-12 row">
+					<p class="col">Total Discount</p>
+					<p class="col" id="totalDiscountValue">-${{totals.discount}}</p>
+				</div>
+				<hr class="col-12" />
+				{% endif %}
+				<div class="col-12 row font-weight-bold">
+					<p class="col">Total</p>
+					<p class="col" id="subtotal">${{totals.subtotal}}</p>
+				</div>
+				<a
+					href="{{ url_for('checkout.view_checkout')}}"
+					class="btn btn-dark rounded-0 btn-block font-weight-bold col-8 mx-auto"
+					>Checkout</a
+				>
+			</div>
+		</aside>
+		{%else%}
+		<p>Cart is empty</p>
+		{%endif%}
+	</div>
+</div>
+
+{% endblock %}

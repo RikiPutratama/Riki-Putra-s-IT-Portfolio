@@ -1,0 +1,63 @@
+{% from 'bootstrap4/table.html' import render_table %} {% extends "base.html" %}
+{% block content %}
+<div class="row">
+	<div class="col-md-6 mx-auto">
+		<div class="card">
+			<div class="card-header bg-success text-white">
+				<h4>Order Confirmation</h4>
+			</div>
+			<div class="card-body">
+				<p>
+					Thank you for your order, {{order.customer_name}}! Your order has been
+					successfully placed.
+				</p>
+				<h5>Order Details:</h5>
+				<ul>
+					<li><strong>Order ID:</strong> {{order.id}}</li>
+					<li><strong>Date:</strong> {{order.date}}</li>
+					<li><strong>Total Amount:</strong> ${{order.total_amount}}</li>
+				</ul>
+				<h5>Shipping Information:</h5>
+				<address>
+					{{order.customer_name}}<br />
+					<span>{{order.shipping_address.house_number}}</span>
+					<span>{{order.shipping_address.street}} </span><br />
+					<span>{{order.shipping_address.city}},</span>
+					<span>{{order.shipping_address.state}}</span>
+					<span>{{order.shipping_address.zip_code}}</span><br />
+					<span>{{order.shipping_address.country}} </span><br />
+					<span>{{order.email}}</span><br />
+				</address>
+				<h5>Items Ordered:</h5>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Product</th>
+							<th>Quantity</th>
+							<th>Unit Price</th>
+							<th>Total Price</th>
+						</tr>
+					</thead>
+					{%for detail in order.order_details %}
+					<tbody>
+						<tr>
+							<td>{{detail.product.name}}</td>
+							<td>{{detail.quantity}}</td>
+							<td>${{detail.product_price}}</td>
+							<!-- round 2 ensure that there is not too big floating numbers -->
+							<td>${{(detail.product_price * detail.quantity) | round(2) }}</td>
+						</tr>
+					</tbody>
+					{%endfor%}
+				</table>
+				<p class="text-center">
+					<a href="{{ url_for('main.index') }}" class="btn btn-outline-dark"
+						>Continue Shopping</a
+					>
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

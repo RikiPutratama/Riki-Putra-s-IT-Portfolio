@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-4">
+<div class="mb-4">
+    {% if category%}
+    <h2 class=" display-4 text-black font-weight-bold text-capitalize">
+        {{gender}} {{category}}
+    </h2>
+    {% else%}
+    <h2 class=" display-4 text-black font-weight-bold text-capitalize">
+        All {{gender}} products
+    </h2>
+    {%endif%}
+    <p class=" text-black font-weight-bold">{{products|length}} Products
+    </p>
+</div>
+<div class="row ">
+
+    <button id="toggle-filter-form" class="btn btn-outline-secondary rounded-0 col-3 ml-4 mb-4">Filter</button>
+    <div class="col-md-2 mb-4 " id="filter-form">
+
+
+        <p class="mb-0 font-weight-bold">Categories: </p>
+        <div class=" row ">
+            {% for category in clothes_categories %}
+                    <div class=" col-md-12 col-6  ">
+                        <a class=" btn btn-outline-secondary mt-4 rounded-0 w-100 text-center font-weight-bold text-capitalize" href="{{ url_for('products.shop', gender=gender, category=category.name) }}">{{ category.name }}</a>                    </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+    <ul class="col-12 col-md-10 row  mx-auto">
+        {% for product in products %}
+        <li class="col-9 col-sm-8 mx-auto col-md-6 col-lg-4 shop-product-card h-full d-flex flex-column align-items-center mb-4 " >
+
+            <div class="position-relative h-75 w-100 ">
+                <a class="shop-product-card-top w-100 h-100 d-flex justify-content-center rounded" href="{{ url_for('products.view_product',id=product.id) }}">
+                    <img src="{{ product.image }}" class="h-100 rounded mx-auto" style="object-fit: cover;"/>
+                </a>
+
+            </div>
+            <a class="h-25 w-100 d-flex flex-column align-items-start justify-content-start" href="{{ url_for('products.view_product',id=product.id) }}">
+                <h5 class="mb-0 text-black font-weight-bold ">{{ product.name }}</h5>
+                    <p class="text-xs text-secondary mb-0">
+                        {% for category in product.categories %}
+                        {{category.name}}
+                        {% endfor %}
+                    </p>
+                    {% if product.discount_price == None %}
+                    <p class="text-xs text-secondary mb-0">${{ product.price }}</p>
+                    {% else %}
+                    <p class="text-xs text-danger mb-0"><s>${{ product.price }} </s><span class="text-xs text-secondary mb-0">{{ product.discount_price }}<span></p>
+                    {% endif %}
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+
+
+</div>
+</div>
+
+
+<script>
+    //Handle the filter-form button display
+    document.addEventListener('DOMContentLoaded', function () {
+       const form = document.getElementById('filter-form');
+       const toggleButton = document.getElementById('toggle-filter-form');
+
+       toggleButton.addEventListener('click', function () {
+          if (form.style.display === 'none' || form.style.display === '') {
+             form.style.display = 'block';
+          } else {
+             form.style.display = 'none';
+          }
+       });
+    });
+ </script>
+
+
+<style>
+    @media (max-width: 767px) {
+       #filter-form {
+          display: none;
+       }
+    }
+ </style>
+
+{% endblock %}

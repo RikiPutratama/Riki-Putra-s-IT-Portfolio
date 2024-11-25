@@ -1,0 +1,88 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="container-fluid mt-5">
+	<div class="row">
+		<div class="col-md-6 d-flex justify-content-end">
+			<img
+				src="{{ product.image }}"
+				class="img-fluid product-image"
+				alt="{{ product.name }}"
+			/>
+		</div>
+		<div class="col-12 col-md-6">
+			<h1 class="display-3 mt-4 mb-4 font-weight-bold">{{ product.name }}</h1>
+			{% if product.discount_price == None %}
+			<h3 class="text-black mb-0">${{ product.price }}</h3>
+			{% else %}
+			<p class=""><s>${{ product.price }}</s></p>
+			<p class="text-xs mb-0"></p>
+			<p class="text-danger">
+				<span class="product-discount-price"
+					>${{ product.discount_price }}</span
+				>
+			</p>
+			{% endif %}
+			<p class="text-secondary mt-4 mb-4">{{ product.description }}</p>
+
+			<form method="POST" class="row col-12 col-md-10 col-lg-8 mt-4">
+				{{ form.hidden_tag() }}
+				<div class="form-group quantity-section col-6">
+					<label for="quantity" class="text-captalize font-weight-bold"
+						>Quantity:</label
+					>
+
+					{{ form.quantity(class="form-control rounded-0 bg-white
+					border-secondary text-secondary", id="product_quantity") }} {% if
+					form.quantity.errors %}
+					<ul class="errors">
+						{% for error in form.quantity.errors %}
+						<li>{{ error }}</li>
+						{% endfor %}
+					</ul>
+					{% endif %}
+				</div>
+
+				{% for sub_form in form.options %}
+				<div class="form-group options-section col-6">
+					<label class="text-capitalize font-weight-bold"
+						>{{ sub_form.option.label }} :</label
+					>
+					{{sub_form.option(class="form-control rounded-0 bg-white
+					border-secondary text-secondary " ) }} {% if sub_form.option.errors %}
+					<ul class="errors">
+						{% for error in sub_form.option.errors %}
+						<li>{{ error }}</li>
+						{% endfor %}
+					</ul>
+					{% endif %}
+				</div>
+				{% endfor %}
+
+				<div class="col-12">
+					<button type="submit" class="w-100 btn btn-dark rounded-0 atc-button">
+						Add to Cart
+					</button>
+				</div>
+			</form>
+			<div class="row col-12 col-md-10 col-lg-8 justify-content-around mb-5">
+				<a
+					id="backButton"
+					class="col-5 mt-4 btn btn-outline-secondary text-center rounded-0"
+					>Back</a
+				>
+
+				{%if atc%}
+				<a
+					class="col-5 mt-4 btn btn-outline-secondary rounded-0"
+					href="{{url_for('cart.view_cart')}}"
+				>
+					Show cart {%else%}
+					<div class="col-5"></div>
+					{%endif%}
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
